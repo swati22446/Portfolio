@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Swati — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-name">sw.</span>
+    <ul>
+      <li><a href="#about">about</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-text">SWATI</div>
+    <div class="hero-content">
+      <p class="hero-tag">// student · developer · builder</p>
+      <h1>
+        <span class="line line1">Turning ideas</span>
+        <span class="line line2"><em>into code.</em></span>
+      </h1>
+      <p class="hero-sub">CS student passionate about competitive programming, machine learning, and building things that matter.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Work</a>
+        <a href="#contact" class="btn-ghost">Say Hello →</a>
+      </div>
+    </div>
+    <div class="hero-scroll">scroll ↓</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-label">01 / about</div>
+    <div class="about-layout">
+      <h2>Hello, I'm <em>Swati.</em></h2>
+      <div class="about-body">
+        <div class="about-text">
+          <p>I'm a Computer Science student drawn to the elegance of well-written code and the logic behind intelligent systems. I enjoy breaking down complex problems and building solutions that are clean, efficient, and purposeful.</p>
+          <p>I work in <strong>Java and Python</strong> — currently sharpening my DSA fundamentals while exploring the world of machine learning.</p>
+        </div>
+        <div class="about-facts">
+          <div class="fact"><span class="fact-num">2</span><span>Languages</span></div>
+          <div class="fact"><span class="fact-num">1</span><span>Relentless curiosity</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="projects">
+    <div class="section-label">02 / projects</div>
+    <h2>Selected Work</h2>
+    <div class="projects-grid">
+
+      <div class="project-card" data-index="01">
+        <div class="project-meta">
+          <span class="project-tag">Machine Learning</span>
+          <span class="project-year">2025</span>
+        </div>
+        <h3>Yoga Pose Classifier</h3>
+        <p>Deep learning model using Xception architecture trained on Kaggle dataset to classify yoga poses with high accuracy. Built in Google Colab.</p>
+        <div class="project-tech">
+          <span>Python</span><span>TensorFlow</span><span>Xception</span><span>Colab</span>
+        </div>
+        <a href="#" class="project-link">View Project →</a>
+      </div>
+
+      <div class="project-card" data-index="02">
+        <div class="project-meta">
+          <span class="project-tag">Competitive Programming</span>
+          <span class="project-year">2025</span>
+        </div>
+        <h3>K-Palindrome Partitioner</h3>
+        <p>Efficient DP solution to partition strings into K palindromes with minimum cuts. Uses palindrome precomputation + optimized 2D DP table.</p>
+        <div class="project-tech">
+          <span>C++</span><span>Dynamic Programming</span><span>String Algorithms</span>
+        </div>
+        <a href="#" class="project-link">View Solution →</a>
+      </div>
+
+      <div class="project-card" data-index="03">
+        <div class="project-meta">
+          <span class="project-tag">Java · Algorithms</span>
+          <span class="project-year">2025</span>
+        </div>
+        <h3>Quiz Strategy Optimizer</h3>
+        <p>Optimized quiz-taking strategy using BigInteger arithmetic to handle large-number scoring without overflow. Clean algorithmic design.</p>
+        <div class="project-tech">
+          <span>Java</span><span>BigInteger</span><span>Greedy</span>
+        </div>
+        <a href="#" class="project-link">View Solution →</a>
+      </div>
+
+      <div class="project-card featured" data-index="04">
+        <div class="project-meta">
+          <span class="project-tag">Add Your Best Project</span>
+          <span class="project-year">2025</span>
+        </div>
+        <h3>Your Featured Project</h3>
+        <p>Replace this with your most impressive project. Make it shine — describe the problem, your approach, and the impact.</p>
+        <div class="project-tech">
+          <span>Tech 1</span><span>Tech 2</span><span>Tech 3</span>
+        </div>
+        <a href="#" class="project-link">View Project →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills" id="skills">
+    <div class="section-label">03 / skills</div>
+    <h2>What I Work With</h2>
+    <div class="skills-container">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-bar" style="--w:90%"></span><span>C++</span></div>
+          <div class="skill-item"><span class="skill-bar" style="--w:85%"></span><span>Java</span></div>
+          <div class="skill-item"><span class="skill-bar" style="--w:80%"></span><span>Python</span></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>ML / Data</h4>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-bar" style="--w:75%"></span><span>TensorFlow / Keras</span></div>
+          <div class="skill-item"><span class="skill-bar" style="--w:70%"></span><span>NumPy / Pandas</span></div>
+          <div class="skill-item"><span class="skill-bar" style="--w:65%"></span><span>Scikit-learn</span></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>CS Concepts</h4>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-bar" style="--w:95%"></span><span>Data Structures</span></div>
+          <div class="skill-item"><span class="skill-bar" style="--w:90%"></span><span>Dynamic Programming</span></div>
+          <div class="skill-item"><span class="skill-bar" style="--w:80%"></span><span>Graph Algorithms</span></div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Tools</h4>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-bar" style="--w:85%"></span><span>Git / GitHub</span></div>
+          <div class="skill-item"><span class="skill-bar" style="--w:80%"></span><span>Google Colab</span></div>
+          <div class="skill-item"><span class="skill-bar" style="--w:70%"></span><span>VS Code</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-label">04 / contact</div>
+    <div class="contact-inner">
+      <h2>Let's <em>connect.</em></h2>
+      <p>Open to internships, collaborations, and interesting problems. Don't hesitate to reach out.</p>
+      <div class="contact-links">
+        <a href="mailto:your@email.com" class="contact-item">
+          <span class="contact-icon">✉</span>
+          <span>your@email.com</span>
+        </a>
+        <a href="https://github.com/yourusername" target="_blank" class="contact-item">
+          <span class="contact-icon">⌥</span>
+          <span>github/yourusername</span>
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-item">
+          <span class="contact-icon">◈</span>
+          <span>linkedin/yourusername</span>
+        </a>
+      </div>
+      <a href="resume.pdf" class="btn-primary" download>Download Résumé</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Designed & built by Swati · <span id="year"></span></span>
+    <span>Made with curiosity ✦</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
