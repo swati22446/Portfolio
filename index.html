@@ -10,6 +10,20 @@
 </head>
 <body>
 
+  <!-- PAGE INTRO OVERLAY -->
+  <div id="page-intro">
+    <div class="intro-bar intro-bar--left"></div>
+    <div class="intro-bar intro-bar--right"></div>
+    <div class="intro-wordmark">
+      <span class="intro-letter">S</span>
+      <span class="intro-letter">W</span>
+      <span class="intro-letter">A</span>
+      <span class="intro-letter">T</span>
+      <span class="intro-letter">I</span>
+    </div>
+    <div class="intro-line"></div>
+  </div>
+
   <!-- CURSOR -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-dot" id="cursor-dot"></div>
@@ -27,54 +41,137 @@
 
   <!-- HERO -->
   <section class="hero" id="hero">
-    <div class="hero-bg-text">SWATI</div>
-    <div class="hero-content">
-      <p class="hero-tag">// student · developer · builder</p>
-      <h1>
-        <span class="line line1">Turning ideas</span>
-        <span class="line line2"><em>into code.</em></span>
-      </h1>
-      <p class="hero-sub">CS student passionate about machine learning, algorithms, and building things that matter.</p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn-primary">View Work</a>
-        <a href="#contact" class="btn-ghost">Say Hello →</a>
+    <div class="hero-layout">
+
+      <!-- LEFT — main text -->
+      <div class="hero-left">
+        <p class="hero-tag">// student · developer · builder</p>
+        <h1>
+          <span class="line line1">Turning ideas</span>
+          <span class="line line2"><em>into code.</em></span>
+        </h1>
+        <p class="hero-sub">CS student passionate about machine learning, algorithms, and building things that matter.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">View Work</a>
+          <a href="#contact" class="btn-ghost">Say Hello →</a>
+        </div>
+        <div class="hero-available">
+          <span class="pulse-dot"></span>
+          open to internships &amp; collaborations
+        </div>
       </div>
+
+      <!-- RIGHT — Current Status Board -->
+      <div class="hero-right">
+        <div class="status-board">
+
+          <div class="sb-header">
+            <span class="sb-label">// status</span>
+            <span class="sb-live"><span class="sb-live-dot"></span>live</span>
+          </div>
+
+          <!-- Time + Location -->
+          <div class="sb-row sb-row--time">
+            <div class="sb-cell">
+              <span class="sb-key">local time</span>
+              <span class="sb-val" id="sb-time">--:-- --</span>
+            </div>
+            <div class="sb-cell">
+              <span class="sb-key">location</span>
+              <span class="sb-val">Dehradun, IN 🇮🇳</span>
+            </div>
+          </div>
+
+          <div class="sb-divider"></div>
+
+          <!-- Status rows -->
+          <div class="sb-row">
+            <span class="sb-key">availability</span>
+            <span class="sb-val sb-available">
+              <span class="pulse-dot"></span>
+              open for opportunities
+            </span>
+          </div>
+
+          <div class="sb-row">
+            <span class="sb-key">currently learning</span>
+            <span class="sb-val">Deep Learning</span>
+          </div>
+
+          <div class="sb-row">
+            <span class="sb-key">working on</span>
+            <span class="sb-val">Yoga Pose Classifier</span>
+          </div>
+
+          <div class="sb-row">
+            <span class="sb-key">focus mode</span>
+            <span class="sb-val sb-focus">
+              <span class="sb-focus-bar"><span class="sb-focus-fill"></span></span>
+              algorithms
+            </span>
+          </div>
+
+          <div class="sb-row">
+            <span class="sb-key">mood</span>
+            <span class="sb-val">building &amp; curious ✦</span>
+          </div>
+
+          <div class="sb-divider"></div>
+
+          <!-- Stack pills -->
+          <div class="sb-stack-row">
+            <span class="sb-key">daily stack</span>
+            <div class="sb-pills">
+              <span class="sb-pill">Java</span>
+              <span class="sb-pill">Python</span>
+              <span class="sb-pill">TensorFlow</span>
+              <span class="sb-pill sb-pill--dim">Git</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
-    <div class="hero-scroll">scroll ↓</div>
+    <div class="hero-scroll">
+      <span class="hero-scroll-line"></span>
+      scroll ↓
+    </div>
   </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="section-label">01 / about</div>
-  <div class="about-layout">
-    <h2>Hello, I'm <em>Swati.</em></h2>
-    <div class="about-body">
-      <div class="about-text">
-        <p>I'm a Computer Science student drawn to the kind of problems that don't let you sleep — the ones that sit in the back of your mind until the logic finally clicks.</p>
-        <p>I build with <strong>Java and Python</strong>, and I'm deeply interested in how intelligent systems work — from the math underneath to the models on top.</p>
-        <p>Currently sharpening my problem-solving instincts and exploring machine learning, one project at a time.</p>
-      </div>
-      <div class="about-facts">
-        <div class="fact">
-          <span class="fact-num">2</span>
-          <span>Languages</span>
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-label">01 / about</div>
+    <div class="about-layout">
+      <h2>Hello, I'm <em>Swati.</em></h2>
+      <div class="about-body">
+        <div class="about-text">
+          <p>I'm a Computer Science student drawn to the kind of problems that don't let you sleep — the ones that sit in the back of your mind until the logic finally clicks.</p>
+          <p>I build with <strong>Java and Python</strong>, and I'm deeply interested in how intelligent systems work — from the math underneath to the models on top.</p>
+          <p>Currently sharpening my problem-solving instincts and exploring machine learning, one project at a time.</p>
         </div>
-        <div class="fact">
-          <span class="fact-num">ML</span>
-          <span>Current focus</span>
-        </div>
-        <div class="about-currently">
-          <h4>// currently</h4>
-          <ul>
-            <li>→ Strengthening DSA foundations</li>
-            <li>→ Exploring deep learning</li>
-            <li>→ Building real projects</li>
-          </ul>
+        <div class="about-facts">
+          <div class="fact">
+            <span class="fact-num">2</span>
+            <span>Languages</span>
+          </div>
+          <div class="fact">
+            <span class="fact-num">ML</span>
+            <span>Current focus</span>
+          </div>
+          <div class="about-currently">
+            <h4>// currently</h4>
+            <ul>
+              <li>→ Strengthening DSA foundations</li>
+              <li>→ Exploring deep learning</li>
+              <li>→ Building real projects</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
   <!-- PROJECTS -->
   <section class="projects" id="projects">
     <div class="section-label">02 / projects</div>
@@ -144,32 +241,65 @@
       <div class="skill-group">
         <h4>Languages</h4>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-bar" style="--w:85%"></span><span>Java</span></div>
-          <div class="skill-item"><span class="skill-bar" style="--w:80%"></span><span>Python</span></div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>Java</span><span class="skill-pct">85%</span></div>
+            <span class="skill-bar" style="--w:85%"></span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>Python</span><span class="skill-pct">80%</span></div>
+            <span class="skill-bar" style="--w:80%"></span>
+          </div>
         </div>
       </div>
       <div class="skill-group">
         <h4>ML / Data</h4>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-bar" style="--w:75%"></span><span>TensorFlow / Keras</span></div>
-          <div class="skill-item"><span class="skill-bar" style="--w:70%"></span><span>NumPy / Pandas</span></div>
-          <div class="skill-item"><span class="skill-bar" style="--w:65%"></span><span>Scikit-learn</span></div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>TensorFlow / Keras</span><span class="skill-pct">75%</span></div>
+            <span class="skill-bar" style="--w:75%"></span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>NumPy / Pandas</span><span class="skill-pct">70%</span></div>
+            <span class="skill-bar" style="--w:70%"></span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>Scikit-learn</span><span class="skill-pct">65%</span></div>
+            <span class="skill-bar" style="--w:65%"></span>
+          </div>
         </div>
       </div>
       <div class="skill-group">
         <h4>CS Concepts</h4>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-bar" style="--w:85%"></span><span>Data Structures</span></div>
-          <div class="skill-item"><span class="skill-bar" style="--w:80%"></span><span>Dynamic Programming</span></div>
-          <div class="skill-item"><span class="skill-bar" style="--w:75%"></span><span>Graph Algorithms</span></div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>Data Structures</span><span class="skill-pct">85%</span></div>
+            <span class="skill-bar" style="--w:85%"></span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>Dynamic Programming</span><span class="skill-pct">80%</span></div>
+            <span class="skill-bar" style="--w:80%"></span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>Graph Algorithms</span><span class="skill-pct">75%</span></div>
+            <span class="skill-bar" style="--w:75%"></span>
+          </div>
         </div>
       </div>
       <div class="skill-group">
         <h4>Tools</h4>
         <div class="skill-list">
-          <div class="skill-item"><span class="skill-bar" style="--w:85%"></span><span>Git / GitHub</span></div>
-          <div class="skill-item"><span class="skill-bar" style="--w:80%"></span><span>Google Colab</span></div>
-          <div class="skill-item"><span class="skill-bar" style="--w:70%"></span><span>VS Code</span></div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>Git / GitHub</span><span class="skill-pct">85%</span></div>
+            <span class="skill-bar" style="--w:85%"></span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>Google Colab</span><span class="skill-pct">80%</span></div>
+            <span class="skill-bar" style="--w:80%"></span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-item-top"><span>VS Code</span><span class="skill-pct">70%</span></div>
+            <span class="skill-bar" style="--w:70%"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -201,7 +331,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <span>Designed & built by Swati · <span id="year"></span></span>
+    <span>Designed &amp; built by Swati · <span id="year"></span></span>
     <span>Made with curiosity ✦</span>
   </footer>
 

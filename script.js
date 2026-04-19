@@ -2,67 +2,40 @@
 //   SWATI PORTFOLIO — script.js
 // ============================================
 
-// ===== PAGE LOADER =====
-(function () {
-  const loader = document.createElement("div");
-  loader.className = "page-loader";
-  loader.innerHTML = `<span class="page-loader-inner">sw.</span>`;
-  document.body.prepend(loader);
-  setTimeout(() => loader.remove(), 1500);
-})();
+// ============================================
+//   CINEMATIC PAGE INTRO
+//   Sequence:
+//   0ms   — body becomes visible (opacity 1)
+//   0ms   — letters stagger in one by one
+//   700ms — gold line extends
+//   1100ms— curtain panels slide apart
+//   1850ms— overlay fades & is removed
+//   1900ms— hero content animates in (via CSS delays)
+// ============================================
+(function runIntro() {
+  const intro = document.getElementById("page-intro");
+  const letters = intro.querySelectorAll(".intro-letter");
 
-// ===== CUSTOM CURSOR =====
-const cursor = document.getElementById("cursor");
-const cursorDot = document.getElementById("cursor-dot");
+  // Show body immediately so background colour is visible
+  document.body.classList.add("ready");
 
-let mouseX = 0,
-  mouseY = 0;
-let cursorX = 0,
-  cursorY = 0;
-
-document.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  cursorDot.style.left = mouseX + "px";
-  cursorDot.style.top = mouseY + "px";
-});
-
-(function animateCursor() {
-  cursorX += (mouseX - cursorX) * 0.1;
-  cursorY += (mouseY - cursorY) * 0.1;
-  cursor.style.left = cursorX + "px";
-  cursor.style.top = cursorY + "px";
-  requestAnimationFrame(animateCursor);
-})();
-
-document.querySelectorAll("a, button").forEach((el) => {
-  el.addEventListener("mouseenter", () => {
-    cursor.style.transform = "translate(-50%, -50%) scale(1.8)";
-    cursor.style.borderColor = "rgba(201,168,76,0.5)";
-    cursor.style.background = "rgba(201,168,76,0.06)";
+  // Stagger letters in
+  letters.forEach((el, i) => {
+    setTimeout(() => el.classList.add("show"), 80 + i * 90);
   });
-  el.addEventListener("mouseleave", () => {
-    cursor.style.transform = "translate(-50%, -50%) scale(1)";
-    cursor.style.borderColor = "var(--gold)";
-    cursor.style.background = "transparent";
-  });
-});
 
-// ===== FOOTER YEAR =====
-document.getElementById("year").textContent = new Date().getFullYear();
+  // Extend gold line
+  setTimeout(() => intro.classList.add("open"), 680);
 
-// ===== NAV SCROLL CLASS =====
-const nav = document.querySelector("nav");
-window.addEventListener(
-  "scroll",
-  () => {
-    nav.classList.toggle("scrolled", window.scrollY > 60);
-  },
-  { passive: true },
-);
+  // Slide curtains apart
+  setTimeout(() => {
+    intro.classList.add("done");
+    setTimeout(() => intro.remove(), 450);
+  }, 1200);
+})();
 
 // ============================================
-//   STAR FIELD — fixed canvas, full page
+//   STAR FIELD — fixed canvas, full viewport
 // ============================================
 (function initStars() {
   const canvas = document.createElement("canvas");
@@ -79,43 +52,52 @@ window.addEventListener(
   resize();
   window.addEventListener("resize", resize, { passive: true });
 
-  // ── Star generation ──────────────────────────────────
-  const TOTAL = 320;
+  // ── Generate stars ──────────────────────────────────
+  const TOTAL = 310;
   const stars = [];
 
-  function pickRadius() {
+  function pickR() {
     const r = Math.random();
-    if (r < 0.62) return 0.28 + Math.random() * 0.42; // tiny   62%
-    if (r < 0.88) return 0.72 + Math.random() * 0.52; // medium 26%
-    return 1.28 + Math.random() * 0.88; // bright 12%
+    if (r < 0.62) return 0.28 + Math.random() * 0.38; // tiny   62%
+    if (r < 0.88) return 0.68 + Math.random() * 0.48; // medium 26%
+    return 1.22 + Math.random() * 0.75; // bright 12%
   }
 
   for (let i = 0; i < TOTAL; i++) {
     stars.push({
       x: Math.random(),
       y: Math.random(),
-      r: pickRadius(),
-      baseA: 0.18 + Math.random() * 0.72,
-      gold: Math.random() < 0.1, // 10% warm gold
-      blue: Math.random() < 0.08, // 8%  cool blue-white
+      r: pickR(),
+      baseA: 0.18 + Math.random() * 0.68,
+      gold: Math.random() < 0.1,
+      blue: Math.random() < 0.08,
       phase: Math.random() * Math.PI * 2,
-      speed: 0.25 + Math.random() * 0.9,
+      speed: 0.22 + Math.random() * 0.8,
     });
   }
 
-  // ── Draw helpers ─────────────────────────────────────
-  function starColor(s, a) {
+  // ── Helpers ─────────────────────────────────────────
+  function col(s, a) {
     if (s.gold) return `rgba(232,196,110,${a})`;
-    if (s.blue) return `rgba(196,218,255,${a})`;
-    return `rgba(240,234,214,${a})`;
+    if (s.blue) return `rgba(190,215,255,${a})`;
+    return `rgba(240,235,216,${a})`;
   }
 
-  // 4-point diffraction spike for brightest stars
-  function drawSpike(s, px, py, a) {
-    const arm = s.r * 4.2;
+  function glow(s, px, py, a) {
+    const g = ctx.createRadialGradient(px, py, 0, px, py, s.r * 4);
+    g.addColorStop(0, col(s, a * 0.22));
+    g.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.beginPath();
+    ctx.arc(px, py, s.r * 4, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+  }
+
+  function spike(s, px, py, a) {
+    const arm = s.r * 4.4;
     ctx.save();
-    ctx.strokeStyle = starColor(s, a * 0.45);
-    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = col(s, a * 0.38);
+    ctx.lineWidth = 0.45;
     ctx.beginPath();
     ctx.moveTo(px - arm, py);
     ctx.lineTo(px + arm, py);
@@ -125,131 +107,124 @@ window.addEventListener(
     ctx.restore();
   }
 
-  // Soft glow for medium+ stars
-  function drawGlow(s, px, py, a) {
-    const g = ctx.createRadialGradient(px, py, 0, px, py, s.r * 3.5);
-    g.addColorStop(0, starColor(s, a * 0.28));
-    g.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.beginPath();
-    ctx.arc(px, py, s.r * 3.5, 0, Math.PI * 2);
-    ctx.fillStyle = g;
-    ctx.fill();
-  }
-
-  // ── Animation loop ───────────────────────────────────
+  // ── Loop ────────────────────────────────────────────
   let prev = performance.now();
 
   function draw(now) {
-    const dt = Math.min((now - prev) / 1000, 0.05); // cap dt at 50ms
+    const dt = Math.min((now - prev) / 1000, 0.05);
     prev = now;
-
     ctx.clearRect(0, 0, W, H);
 
     for (let i = 0; i < stars.length; i++) {
       const s = stars[i];
       s.phase += s.speed * dt;
-
-      // Smooth, non-linear twinkle
       const tw = 0.5 + 0.5 * Math.sin(s.phase);
-      const tw2 = tw * tw; // squared → snappier bright peaks
-      const a = s.baseA * (0.45 + 0.55 * tw2);
+      const a = s.baseA * (0.42 + 0.58 * tw * tw); // squared for snappier peaks
 
       const px = s.x * W;
       const py = s.y * H;
 
-      // Glow halo for medium / bright stars
-      if (s.r >= 0.72) drawGlow(s, px, py, a);
+      if (s.r >= 0.68) glow(s, px, py, a);
 
-      // Core dot
       ctx.beginPath();
       ctx.arc(px, py, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = starColor(s, a);
+      ctx.fillStyle = col(s, a);
       ctx.fill();
 
-      // Diffraction spike only on the brightest
-      if (s.r >= 1.28) drawSpike(s, px, py, a);
+      if (s.r >= 1.22) spike(s, px, py, a);
     }
 
     requestAnimationFrame(draw);
   }
-
   requestAnimationFrame(draw);
 })();
 
 // ============================================
-//   SCROLL REVEAL — staggered per group
+//   FOOTER YEAR
 // ============================================
-const revealEls = document.querySelectorAll(
-  ".project-card, .skill-group, .about-text, .about-facts, .contact-item, .section-label, h2",
-);
+document.getElementById("year").textContent = new Date().getFullYear();
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        // Stagger siblings within a grid
-        const siblings = entry.target.parentElement
-          ? [...entry.target.parentElement.children].filter((c) =>
-              c.classList.contains(entry.target.classList[0]),
-            )
-          : [];
-        const idx = siblings.indexOf(entry.target);
-        const delay = idx >= 0 ? idx * 80 : 0;
+// ============================================
+//   STATUS BOARD — LIVE CLOCK (IST)
+// ============================================
+(function liveClock() {
+  const el = document.getElementById("sb-time");
+  if (!el) return;
 
-        setTimeout(() => {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
-        }, delay);
+  function tick() {
+    const now = new Date();
+    // Display in IST (UTC+5:30)
+    const ist = new Date(now.getTime() + 5.5 * 60 * 60 * 1000);
+    let h = ist.getUTCHours();
+    const m = String(ist.getUTCMinutes()).padStart(2, "0");
+    const s = String(ist.getUTCSeconds()).padStart(2, "0");
+    const ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    el.textContent = `${String(h).padStart(2, "0")}:${m}:${s} ${ampm}`;
+  }
 
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.1 },
-);
+  tick();
+  setInterval(tick, 1000);
+})();
 
-revealEls.forEach((el) => {
-  el.style.opacity = "0";
-  el.style.transform = "translateY(22px)";
-  el.style.transition = "opacity 0.75s ease, transform 0.75s ease";
-  revealObserver.observe(el);
+// ============================================
+//   CUSTOM CURSOR
+// ============================================
+const cursor = document.getElementById("cursor");
+const cursorDot = document.getElementById("cursor-dot");
+let mouseX = 0,
+  mouseY = 0;
+let curX = 0,
+  curY = 0;
+
+document.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursorDot.style.left = mouseX + "px";
+  cursorDot.style.top = mouseY + "px";
+});
+
+(function loopCursor() {
+  curX += (mouseX - curX) * 0.1;
+  curY += (mouseY - curY) * 0.1;
+  cursor.style.left = curX + "px";
+  cursor.style.top = curY + "px";
+  requestAnimationFrame(loopCursor);
+})();
+
+document.querySelectorAll("a, button").forEach((el) => {
+  el.addEventListener("mouseenter", () => {
+    cursor.style.transform = "translate(-50%,-50%) scale(1.8)";
+    cursor.style.borderColor = "rgba(201,168,76,0.5)";
+    cursor.style.background = "rgba(201,168,76,0.06)";
+  });
+  el.addEventListener("mouseleave", () => {
+    cursor.style.transform = "translate(-50%,-50%) scale(1)";
+    cursor.style.borderColor = "var(--gold)";
+    cursor.style.background = "transparent";
+  });
 });
 
 // ============================================
-//   SKILL BARS — animate width on scroll
+//   NAV — scrolled class + active link
 // ============================================
-const skillBars = document.querySelectorAll(".skill-bar");
-
-const skillObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animated");
-        skillObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.4 },
-);
-
-skillBars.forEach((bar) => skillObserver.observe(bar));
-
-// ============================================
-//   ACTIVE NAV HIGHLIGHT ON SCROLL
-// ============================================
+const nav = document.querySelector("nav");
 const sections = document.querySelectorAll("section[id]");
 const navLinks = document.querySelectorAll("nav ul a");
 
 window.addEventListener(
   "scroll",
   () => {
+    nav.classList.toggle("scrolled", window.scrollY > 50);
+
     let current = "";
     sections.forEach((s) => {
-      if (window.scrollY >= s.offsetTop - 140) current = s.id;
+      if (window.scrollY >= s.offsetTop - 150) current = s.id;
     });
+
     navLinks.forEach((link) => {
-      const isActive = link.getAttribute("href") === "#" + current;
-      link.style.color = isActive ? "var(--gold)" : "";
+      const active = link.getAttribute("href") === "#" + current;
+      link.classList.toggle("active", active);
     });
   },
   { passive: true },
@@ -269,41 +244,75 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => {
 });
 
 // ============================================
-//   HERO TAG TYPEWRITER (subtle)
+//   SCROLL REVEAL — staggered siblings
 // ============================================
-(function typewriter() {
-  const tag = document.querySelector(".hero-tag");
-  if (!tag) return;
-  const full = tag.textContent.trim();
-  tag.textContent = "";
-  tag.style.opacity = "1";
-  tag.style.animation = "none";
+const revealTargets = document.querySelectorAll(
+  ".project-card, .skill-group, .about-text, .about-facts, .contact-item",
+);
 
-  let i = 0;
-  const interval = setInterval(() => {
-    tag.textContent = full.slice(0, i + 1);
-    i++;
-    if (i >= full.length) clearInterval(interval);
-  }, 48);
-})();
+const revealObs = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+
+      // Compute stagger index among siblings of same class
+      const cls = entry.target.classList[0];
+      const siblings = cls
+        ? [...(entry.target.parentElement?.children || [])].filter((c) =>
+            c.classList.contains(cls),
+          )
+        : [];
+      const idx = siblings.indexOf(entry.target);
+      const delay = Math.max(idx, 0) * 75;
+
+      setTimeout(() => {
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+      }, delay);
+
+      revealObs.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.1 },
+);
+
+revealTargets.forEach((el) => {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(20px)";
+  el.style.transition = "opacity 0.72s ease, transform 0.72s ease";
+  revealObs.observe(el);
+});
 
 // ============================================
-//   PROJECT CARD — magnetic tilt on hover
+//   SKILL BARS
+// ============================================
+const skillObs = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animated");
+        skillObs.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.4 },
+);
+
+document.querySelectorAll(".skill-bar").forEach((b) => skillObs.observe(b));
+
+// ============================================
+//   PROJECT CARD — subtle 3-D tilt on hover
 // ============================================
 document.querySelectorAll(".project-card").forEach((card) => {
   card.addEventListener("mousemove", (e) => {
-    const rect = card.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = (e.clientX - cx) / (rect.width / 2);
-    const dy = (e.clientY - cy) / (rect.height / 2);
-    const tiltX = dy * -3;
-    const tiltY = dx * 3;
-    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(4px)`;
-    card.style.transition = "transform 0.1s ease, background 0.35s";
+    const r = card.getBoundingClientRect();
+    const dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+    const dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+    card.style.transform = `perspective(900px) rotateX(${dy * -2.5}deg) rotateY(${dx * 2.5}deg) translateZ(4px)`;
+    card.style.transition = "transform 0.08s ease, background 0.35s";
   });
   card.addEventListener("mouseleave", () => {
     card.style.transform = "";
-    card.style.transition = "transform 0.5s ease, background 0.35s";
+    card.style.transition = "transform 0.55s ease, background 0.35s";
   });
 });
