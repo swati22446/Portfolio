@@ -244,7 +244,8 @@ h2 em { color: var(--gold); font-style: italic; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 7rem;
+  padding-top: 4rem;
+  margin-top: -2rem;
   max-width: 100%;
   padding-left: 4rem;
   padding-right: 4rem;
@@ -253,6 +254,7 @@ h2 em { color: var(--gold); font-style: italic; }
 
 /* Two-column hero layout */
 .hero-layout {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 420px;
   gap: 5rem;
@@ -260,6 +262,7 @@ h2 em { color: var(--gold); font-style: italic; }
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  min-height: 660px;
 }
 
 /* ─── LEFT ─── */
@@ -349,16 +352,18 @@ h2 em { color: var(--gold); font-style: italic; }
 
 /* ─── RIGHT PANEL ─── */
 .hero-right {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(24px);
+  width: 420px;
   opacity: 0;
   animation: fadeLeft 0.9s ease 2.5s forwards;
 }
 
 @keyframes fadeLeft {
-  from { opacity: 0; transform: translateX(24px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translateY(-50%) translateX(24px); }
+  to   { opacity: 1; transform: translateY(-50%) translateX(0); }
 }
 
 /* Info card */
@@ -949,6 +954,8 @@ footer {
   padding: 1.2rem 0 1rem;
   position: relative;
   z-index: 1;
+  height: 430px;
+  overflow: hidden;
 }
 
 .tp-line {
@@ -1044,8 +1051,17 @@ footer {
   .hero-layout {
     grid-template-columns: 1fr;
     gap: 3rem;
+    min-height: auto;
   }
-  .hero-right { max-width: 480px; }
+  .hero-right {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-width: 480px;
+    transform: none;
+    animation: fadeUp 0.9s ease 2.5s forwards;
+  }
 }
 
 @media (max-width: 768px) {

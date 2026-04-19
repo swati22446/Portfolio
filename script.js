@@ -222,6 +222,62 @@ document.getElementById("year").textContent = new Date().getFullYear();
 })();
 
 // ============================================
+//   TERMINAL PANEL — TYPEWRITER EFFECT
+// ============================================
+(function terminalTypewriter() {
+  const body = document.querySelector(".tp-body");
+  if (!body) return;
+
+  const lines = body.querySelectorAll(".tp-line");
+
+  // Use opacity so lines always occupy their height — no layout reflow
+  const lineData = [];
+  lines.forEach((line) => {
+    const spans = [
+      ...line.querySelectorAll("span:not(.tp-ln):not(.tp-cursor-blink)"),
+    ];
+    const saved = spans.map((s) => {
+      const text = s.textContent;
+      s.textContent = "";
+      return { el: s, text };
+    });
+    line.style.opacity = "0";
+    lineData.push({ line, spans: saved });
+  });
+
+  const CHAR_DELAY = 2; // ms per character — near-instant
+  const LINE_PAUSE = 8; // ms between lines
+
+  function typeLine(lineIdx) {
+    if (lineIdx >= lineData.length) return;
+    const { line, spans } = lineData[lineIdx];
+    line.style.opacity = "1";
+
+    let spanIdx = 0,
+      charIdx = 0;
+
+    function nextChar() {
+      if (spanIdx >= spans.length) {
+        setTimeout(() => typeLine(lineIdx + 1), LINE_PAUSE);
+        return;
+      }
+      const { el, text } = spans[spanIdx];
+      if (charIdx < text.length) {
+        el.textContent += text[charIdx++];
+        setTimeout(nextChar, CHAR_DELAY);
+      } else {
+        spanIdx++;
+        charIdx = 0;
+        nextChar();
+      }
+    }
+    nextChar();
+  }
+
+  setTimeout(() => typeLine(0), 2800);
+})();
+
+// ============================================
 //   CUSTOM CURSOR
 // ============================================
 const cursor = document.getElementById("cursor");
