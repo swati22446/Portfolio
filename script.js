@@ -145,22 +145,21 @@
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // ============================================
-//   STATUS BOARD — LIVE CLOCK (IST)
+//   TERMINAL PANEL — LIVE CLOCK (IST)
 // ============================================
 (function liveClock() {
-  const el = document.getElementById("sb-time");
+  const el = document.getElementById("tp-time");
   if (!el) return;
 
   function tick() {
     const now = new Date();
-    // Display in IST (UTC+5:30)
     const ist = new Date(now.getTime() + 5.5 * 60 * 60 * 1000);
     let h = ist.getUTCHours();
     const m = String(ist.getUTCMinutes()).padStart(2, "0");
     const s = String(ist.getUTCSeconds()).padStart(2, "0");
     const ampm = h >= 12 ? "PM" : "AM";
     h = h % 12 || 12;
-    el.textContent = `${String(h).padStart(2, "0")}:${m}:${s} ${ampm}`;
+    el.textContent = `IST ${String(h).padStart(2, "0")}:${m}:${s} ${ampm}`;
   }
 
   tick();

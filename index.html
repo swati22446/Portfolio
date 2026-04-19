@@ -61,72 +61,93 @@
         </div>
       </div>
 
-      <!-- RIGHT — Current Status Board -->
+      <!-- RIGHT — Terminal Manifesto -->
       <div class="hero-right">
-        <div class="status-board">
+        <div class="terminal-panel">
 
-          <div class="sb-header">
-            <span class="sb-label">// status</span>
-            <span class="sb-live"><span class="sb-live-dot"></span>live</span>
-          </div>
-
-          <!-- Time + Location -->
-          <div class="sb-row sb-row--time">
-            <div class="sb-cell">
-              <span class="sb-key">local time</span>
-              <span class="sb-val" id="sb-time">--:-- --</span>
+          <!-- Window chrome -->
+          <div class="tp-chrome">
+            <div class="tp-dots">
+              <span class="tp-dot tp-dot--red"></span>
+              <span class="tp-dot tp-dot--yellow"></span>
+              <span class="tp-dot tp-dot--green"></span>
             </div>
-            <div class="sb-cell">
-              <span class="sb-key">location</span>
-              <span class="sb-val">Dehradun, IN 🇮🇳</span>
+            <span class="tp-title">swati.config.js</span>
+            <span class="tp-badge">● live</span>
+          </div>
+
+          <!-- Code body -->
+          <div class="tp-body">
+            <div class="tp-line">
+              <span class="tp-ln">1</span>
+              <span class="tc-kw">const</span> <span class="tc-fn">swati</span> <span class="tc-op">=</span> <span class="tc-pu">{</span>
+            </div>
+            <div class="tp-line tp-line--indent">
+              <span class="tp-ln">2</span>
+              <span class="tc-key">name</span><span class="tc-op">:</span> <span class="tc-str">"Swati Naithani"</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line tp-line--indent">
+              <span class="tp-ln">3</span>
+              <span class="tc-key">role</span><span class="tc-op">:</span> <span class="tc-str">"CS Student &amp; Builder"</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line tp-line--indent">
+              <span class="tp-ln">4</span>
+              <span class="tc-key">location</span><span class="tc-op">:</span> <span class="tc-str">"Dehradun, India"</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line tp-line--indent">
+              <span class="tp-ln">5</span>
+              <span class="tc-key">focus</span><span class="tc-op">:</span> <span class="tc-arr">[</span>
+            </div>
+            <div class="tp-line tp-line--indent2">
+              <span class="tp-ln">6</span>
+              <span class="tc-str">"machine learning"</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line tp-line--indent2">
+              <span class="tp-ln">7</span>
+              <span class="tc-str">"deep learning"</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line tp-line--indent2">
+              <span class="tp-ln">8</span>
+              <span class="tc-str">"algorithms"</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line tp-line--indent">
+              <span class="tp-ln">9</span>
+              <span class="tc-arr">]</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line tp-line--indent">
+              <span class="tp-ln">10</span>
+              <span class="tc-key">status</span><span class="tc-op">:</span> <span class="tc-str">"open to internships"</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line tp-line--indent">
+              <span class="tp-ln">11</span>
+              <span class="tc-key">building</span><span class="tc-op">:</span> <span class="tc-str">"Yoga Pose Classifier"</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line tp-line--indent">
+              <span class="tp-ln">12</span>
+              <span class="tc-key">superpower</span><span class="tc-op">:</span> <span class="tc-str">"turning curiosity into code"</span><span class="tc-pu">,</span>
+            </div>
+            <div class="tp-line">
+              <span class="tp-ln">13</span>
+              <span class="tc-pu">}</span><span class="tc-op">;</span>
+            </div>
+            <div class="tp-line tp-line--gap">
+              <span class="tp-ln">14</span>
+            </div>
+            <div class="tp-line">
+              <span class="tp-ln">15</span>
+              <span class="tc-cm">// currently manifesting ✦</span>
+            </div>
+            <div class="tp-line tp-cursor-line">
+              <span class="tp-ln">16</span>
+              <span class="tc-kw">export</span> <span class="tc-kw">default</span> <span class="tc-fn">swati</span><span class="tc-op">;</span>
+              <span class="tp-cursor-blink"></span>
             </div>
           </div>
 
-          <div class="sb-divider"></div>
-
-          <!-- Status rows -->
-          <div class="sb-row">
-            <span class="sb-key">availability</span>
-            <span class="sb-val sb-available">
-              <span class="pulse-dot"></span>
-              open for opportunities
-            </span>
-          </div>
-
-          <div class="sb-row">
-            <span class="sb-key">currently learning</span>
-            <span class="sb-val">Deep Learning</span>
-          </div>
-
-          <div class="sb-row">
-            <span class="sb-key">working on</span>
-            <span class="sb-val">Yoga Pose Classifier</span>
-          </div>
-
-          <div class="sb-row">
-            <span class="sb-key">focus mode</span>
-            <span class="sb-val sb-focus">
-              <span class="sb-focus-bar"><span class="sb-focus-fill"></span></span>
-              algorithms
-            </span>
-          </div>
-
-          <div class="sb-row">
-            <span class="sb-key">mood</span>
-            <span class="sb-val">building &amp; curious ✦</span>
-          </div>
-
-          <div class="sb-divider"></div>
-
-          <!-- Stack pills -->
-          <div class="sb-stack-row">
-            <span class="sb-key">daily stack</span>
-            <div class="sb-pills">
-              <span class="sb-pill">Java</span>
-              <span class="sb-pill">Python</span>
-              <span class="sb-pill">TensorFlow</span>
-              <span class="sb-pill sb-pill--dim">Git</span>
-            </div>
+          <!-- Footer strip -->
+          <div class="tp-footer">
+            <span class="tp-status"><span class="pulse-dot"></span>open for opportunities</span>
+            <span class="tp-time" id="tp-time">--:-- --</span>
           </div>
 
         </div>
@@ -242,11 +263,11 @@
         <h4>Languages</h4>
         <div class="skill-list">
           <div class="skill-item">
-            <div class="skill-item-top"><span>Java</span><span class="skill-pct">85%</span></div>
+            <div class="skill-item-top"><span>Java</span></div>
             <span class="skill-bar" style="--w:85%"></span>
           </div>
           <div class="skill-item">
-            <div class="skill-item-top"><span>Python</span><span class="skill-pct">80%</span></div>
+            <div class="skill-item-top"><span>Python</span></div>
             <span class="skill-bar" style="--w:80%"></span>
           </div>
         </div>
@@ -255,15 +276,15 @@
         <h4>ML / Data</h4>
         <div class="skill-list">
           <div class="skill-item">
-            <div class="skill-item-top"><span>TensorFlow / Keras</span><span class="skill-pct">75%</span></div>
+            <div class="skill-item-top"><span>TensorFlow / Keras</span></div>
             <span class="skill-bar" style="--w:75%"></span>
           </div>
           <div class="skill-item">
-            <div class="skill-item-top"><span>NumPy / Pandas</span><span class="skill-pct">70%</span></div>
+            <div class="skill-item-top"><span>NumPy / Pandas</span></div>
             <span class="skill-bar" style="--w:70%"></span>
           </div>
           <div class="skill-item">
-            <div class="skill-item-top"><span>Scikit-learn</span><span class="skill-pct">65%</span></div>
+            <div class="skill-item-top"><span>Scikit-learn</span></div>
             <span class="skill-bar" style="--w:65%"></span>
           </div>
         </div>
@@ -272,15 +293,15 @@
         <h4>CS Concepts</h4>
         <div class="skill-list">
           <div class="skill-item">
-            <div class="skill-item-top"><span>Data Structures</span><span class="skill-pct">85%</span></div>
+            <div class="skill-item-top"><span>Data Structures</span></div>
             <span class="skill-bar" style="--w:85%"></span>
           </div>
           <div class="skill-item">
-            <div class="skill-item-top"><span>Dynamic Programming</span><span class="skill-pct">80%</span></div>
+            <div class="skill-item-top"><span>Dynamic Programming</span></div>
             <span class="skill-bar" style="--w:80%"></span>
           </div>
           <div class="skill-item">
-            <div class="skill-item-top"><span>Graph Algorithms</span><span class="skill-pct">75%</span></div>
+            <div class="skill-item-top"><span>Graph Algorithms</span></div>
             <span class="skill-bar" style="--w:75%"></span>
           </div>
         </div>
@@ -289,15 +310,15 @@
         <h4>Tools</h4>
         <div class="skill-list">
           <div class="skill-item">
-            <div class="skill-item-top"><span>Git / GitHub</span><span class="skill-pct">85%</span></div>
+            <div class="skill-item-top"><span>Git / GitHub</span></div>
             <span class="skill-bar" style="--w:85%"></span>
           </div>
           <div class="skill-item">
-            <div class="skill-item-top"><span>Google Colab</span><span class="skill-pct">80%</span></div>
+            <div class="skill-item-top"><span>Google Colab</span></div>
             <span class="skill-bar" style="--w:80%"></span>
           </div>
           <div class="skill-item">
-            <div class="skill-item-top"><span>VS Code</span><span class="skill-pct">70%</span></div>
+            <div class="skill-item-top"><span>VS Code</span></div>
             <span class="skill-bar" style="--w:70%"></span>
           </div>
         </div>
