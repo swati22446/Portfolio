@@ -52,34 +52,86 @@
   resize();
   window.addEventListener("resize", resize, { passive: true });
 
-  // ── Generate stars ──────────────────────────────────
+  // ── Nebula clouds ────────────────────────────────────
+  // Positioned once, painted every frame at low opacity
+  const NEBULAE = [
+    // { cx, cy as fractions, rx, ry, hue, sat }
+    { cx: 0.72, cy: 0.18, rx: 0.28, ry: 0.22, type: "pink" },
+    { cx: 0.15, cy: 0.55, rx: 0.22, ry: 0.18, type: "purple" },
+    { cx: 0.88, cy: 0.72, rx: 0.2, ry: 0.24, type: "pink" },
+    { cx: 0.42, cy: 0.88, rx: 0.3, ry: 0.16, type: "purple" },
+    { cx: 0.55, cy: 0.35, rx: 0.18, ry: 0.2, type: "pink" },
+  ];
+
+  function drawNebulae() {
+    for (const n of NEBULAE) {
+      const cx = n.cx * W;
+      const cy = n.cy * H;
+      const rx = n.rx * Math.min(W, H);
+      const ry = n.ry * Math.min(W, H);
+
+      ctx.save();
+      ctx.scale(1, ry / rx);
+
+      const g = ctx.createRadialGradient(
+        cx,
+        cy * (rx / ry),
+        0,
+        cx,
+        cy * (rx / ry),
+        rx,
+      );
+
+      if (n.type === "pink") {
+        g.addColorStop(0, "rgba(220, 80, 155, 0.18)");
+        g.addColorStop(0.35, "rgba(195, 55, 135, 0.11)");
+        g.addColorStop(0.65, "rgba(165, 45, 120, 0.055)");
+        g.addColorStop(1, "rgba(0,0,0,0)");
+      } else {
+        g.addColorStop(0, "rgba(140, 65, 210, 0.13)");
+        g.addColorStop(0.4, "rgba(110, 45, 175, 0.07)");
+        g.addColorStop(0.7, "rgba(85, 35, 155, 0.035)");
+        g.addColorStop(1, "rgba(0,0,0,0)");
+      }
+
+      ctx.beginPath();
+      ctx.arc(cx, cy * (rx / ry), rx, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // ── Stars ─────────────────────────────────────────────
   const TOTAL = 310;
   const stars = [];
 
   function pickR() {
     const r = Math.random();
-    if (r < 0.62) return 0.28 + Math.random() * 0.38; // tiny   62%
-    if (r < 0.88) return 0.68 + Math.random() * 0.48; // medium 26%
-    return 1.22 + Math.random() * 0.75; // bright 12%
+    if (r < 0.62) return 0.28 + Math.random() * 0.38;
+    if (r < 0.88) return 0.68 + Math.random() * 0.48;
+    return 1.22 + Math.random() * 0.75;
   }
 
   for (let i = 0; i < TOTAL; i++) {
+    const rnd = Math.random();
     stars.push({
       x: Math.random(),
       y: Math.random(),
       r: pickR(),
       baseA: 0.18 + Math.random() * 0.68,
-      gold: Math.random() < 0.1,
-      blue: Math.random() < 0.08,
+      gold: rnd < 0.1,
+      blue: rnd >= 0.1 && rnd < 0.18,
+      pink: rnd >= 0.18 && rnd < 0.26,
       phase: Math.random() * Math.PI * 2,
       speed: 0.22 + Math.random() * 0.8,
     });
   }
 
-  // ── Helpers ─────────────────────────────────────────
   function col(s, a) {
     if (s.gold) return `rgba(232,196,110,${a})`;
     if (s.blue) return `rgba(190,215,255,${a})`;
+    if (s.pink) return `rgba(240,160,200,${a})`;
     return `rgba(240,235,216,${a})`;
   }
 
@@ -107,7 +159,7 @@
     ctx.restore();
   }
 
-  // ── Loop ────────────────────────────────────────────
+  // ── Loop ─────────────────────────────────────────────
   let prev = performance.now();
 
   function draw(now) {
@@ -115,11 +167,14 @@
     prev = now;
     ctx.clearRect(0, 0, W, H);
 
+    // Nebulae first (background layer)
+    drawNebulae();
+
     for (let i = 0; i < stars.length; i++) {
       const s = stars[i];
       s.phase += s.speed * dt;
       const tw = 0.5 + 0.5 * Math.sin(s.phase);
-      const a = s.baseA * (0.42 + 0.58 * tw * tw); // squared for snappier peaks
+      const a = s.baseA * (0.42 + 0.58 * tw * tw);
 
       const px = s.x * W;
       const py = s.y * H;
